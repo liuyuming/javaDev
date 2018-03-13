@@ -11,12 +11,14 @@
     <name>base</name>
     <modules>
         <module>crm</module>
+        <module>common</module>
     </modules>
     <description>构建管理基础工程</description>
 
 
     <properties>
         <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
 
@@ -44,8 +46,37 @@
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
+
+    <!--通用的jar-->
+    <dependencies>
+        <!--日志文件-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.11</version>
+        </dependency>
+    </dependencies>
 
 
 
