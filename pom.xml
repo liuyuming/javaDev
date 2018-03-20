@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
     <name>base</name>
     <modules>
-        <module>crm</module>
+        <module>singletonDemo</module>
         <module>common</module>
     </modules>
     <description>构建管理基础工程</description>
@@ -106,14 +106,9 @@
 
             <!-- 通用mapper -->
             <dependency>
-                <groupId>com.github.abel533</groupId>
-                <artifactId>mapper</artifactId>
-                <version>2.3.4</version>
-            </dependency>
-            <dependency>
                 <groupId>tk.mybatis</groupId>
-                <artifactId>mapper</artifactId>
-                <version>3.4.2</version>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>2.0.0</version>
             </dependency>
 
 
