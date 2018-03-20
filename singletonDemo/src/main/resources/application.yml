@@ -30,3 +30,16 @@ mapper:
     - tk.mybatis.mapper.common.Mapper
     - tk.mybatis.mapper.common.Mapper2
   notEmpty: true
+
+#boot-actuator
+#启用shutdown
+endpoints:
+ shutdown:
+  enabled: true
+  path: /close
+management:
+ address: 127.0.0.1
+ port: 8898
+ context-path: /admin
+ security:
+  enabled: false
