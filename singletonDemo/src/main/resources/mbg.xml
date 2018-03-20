@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	
+	<!-- 
+	MyBatis3Simple：基础班CRUD
+	MyBatis3：复杂版CRUD
+	 -->
+	<context id="DB2Tables" targetRuntime="MyBatis3Simple">
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+			<property name="caseSensitive" value="true"/>
+		</plugin>
+
+		<commentGenerator>
+			<property name="suppressAllComments" value="true"/>
+		</commentGenerator>
+		<!-- jdbcConnection:指导连接到哪个数据库 -->
+		<jdbcConnection 
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://myaws:3306/crm"
+			userId="root" 
+			password="newPwd">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- javaModelGenerator：生成pojo 
+		targetPackage：生成的pojo放在哪个包
+		targetProject：放在哪个工程下
+		-->
+		<javaModelGenerator targetPackage="com.thruman.pojo"
+			targetProject="E:\myWorkspace\javaDev\singletonDemo\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--sqlMapGenerator：sql映射文件生成器；指定xml生成的地方  -->
+		<sqlMapGenerator targetPackage="com.thruman.dao"
+			targetProject="E:\myWorkspace\javaDev\singletonDemo\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- javaClientGenerator：dao接口生成的地方 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.thruman.dao"
+			targetProject="E:\myWorkspace\javaDev\singletonDemo\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 
+		table：指定要逆向生成哪个数据表
+		tableName="t_cat"：表名
+		domainObjectName=""：这个表对应的对象名
+		 -->
+		<table tableName="user" domainObjectName="User"></table>
+
+	</context>
+</generatorConfiguration>

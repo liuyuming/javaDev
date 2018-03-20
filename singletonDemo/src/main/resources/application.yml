@@ -23,3 +23,10 @@ spring:
 mybatis:
  mapper-locations: classpath:com/thruman/dao/*.xml
  type-aliases-package: com.thruman.dao
+
+#通用mapper配置
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    - tk.mybatis.mapper.common.Mapper2
+  notEmpty: true
