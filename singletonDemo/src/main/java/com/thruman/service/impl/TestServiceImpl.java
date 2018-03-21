@@ -5,9 +5,12 @@ import com.thruman.dao.UserMapper;
 import com.thruman.pojo.Test;
 import com.thruman.pojo.User;
 import com.thruman.service.TestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,6 +20,8 @@ import java.util.List;
  **/
 @Service
 public class TestServiceImpl implements TestService {
+    private static final Logger logger = LoggerFactory.getLogger(TestServiceImpl.class);
+
     @Resource
     private TestDao testDao;
 
@@ -28,6 +33,17 @@ public class TestServiceImpl implements TestService {
     }
 
     public List<User> getUserAll() {
+
         return userMapper.select(null);
+    }
+
+    public void sleep() {
+        try {
+            logger.info("睡眠开始------------------------" + new Date());
+            Thread.sleep(5000);
+            logger.info("睡眠结束------------------------" + new Date());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

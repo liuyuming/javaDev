@@ -34,4 +34,12 @@ public class TestController {
         return testService.getUserAll();
     }
 
+    @GetMapping("/sleep")
+    public String sleep() {
+        testService.sleep();
+        return "成功";
+    }
+
+
+
 }

@@ -10,4 +10,6 @@ public interface TestService {
 
     List<User> getUserAll();
 
+    void sleep();
+
 }
