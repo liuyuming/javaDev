@@ -18,8 +18,9 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = ClusterDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "clusterSqlSessionFactory")
 public class ClusterDataSourceConfig {
 
-    // 精确到 cluster 目录，以便跟其他数据源隔离
-    static final String PACKAGE = "org.spring.springboot.dao.cluster";
+    // dao目录 精确到 cluster 目录，以便跟其他数据源隔离
+    static final String PACKAGE = "com.thruman.dao.cluster";
+    // mapper目录 精确到 cluster 目录，以便跟其他数据源隔离
     static final String MAPPER_LOCATION = "classpath:mapper/cluster/*.xml";
 
     @Value("${cluster.datasource.url}")

@@ -11,11 +11,11 @@
 	 -->
 	<context id="DB2Tables" targetRuntime="MyBatis3Simple">
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
-		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
-			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
-			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
-			<property name="caseSensitive" value="true"/>
-		</plugin>
+		<!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
+			<!--<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>-->
+			<!--&lt;!&ndash; caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true &ndash;&gt;-->
+			<!--<property name="caseSensitive" value="true"/>-->
+		<!--</plugin>-->
 
 		<commentGenerator>
 			<property name="suppressAllComments" value="true"/>
@@ -23,7 +23,7 @@
 		<!-- jdbcConnection:指导连接到哪个数据库 -->
 		<jdbcConnection 
 			driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://myaws:3306/myth_order"
+			connectionURL="jdbc:mysql://myaws:3306/myth_account"
 			userId="root" 
 			password="newPwd">
 		</jdbcConnection>
@@ -50,7 +50,7 @@
 
 		<!-- javaClientGenerator：dao接口生成的地方 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.thruman.dao"
+			targetPackage="com.thruman.dao.master"
 			targetProject="E:\myWorkspace\javaDev\multiDatasoureManagerDemo\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
@@ -60,7 +60,7 @@
 		tableName="t_cat"：表名
 		domainObjectName=""：这个表对应的对象名
 		 -->
-		<table tableName="order" domainObjectName="Order"></table>
+		<table tableName="account" domainObjectName="account"></table>
 
 	</context>
 </generatorConfiguration>
