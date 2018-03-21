@@ -55,11 +55,5 @@ mapper:
 
 
 #日志配置
-#logging:
-#  config: classpath:logback.xml
 logging:
-  level:
-    root: INFO
-    org:
-       springframework:
-         web : debug
+  config: classpath:logback.xml

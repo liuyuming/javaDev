@@ -12,6 +12,8 @@
     <modules>
         <module>singletonDemo</module>
         <module>common</module>
+        <module>springcloudDemo</module>
+        <module>multiDatasoureManagerDemo</module>
     </modules>
     <description>构建管理基础工程</description>
 
