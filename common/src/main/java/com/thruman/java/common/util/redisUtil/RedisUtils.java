@@ -67,7 +67,6 @@ public class RedisUtils {
     public Long expire( String key,  String value,  Integer seconds) {
         return excute(new Function<ShardedJedis, Long>() {
             public Long callback(ShardedJedis e) {
-                e.set(key, value);
                 return e.expire(key, seconds);
             }
         });
@@ -75,8 +74,7 @@ public class RedisUtils {
     public Boolean setNX(String key, String value) {
         return excute(new Function<ShardedJedis, Boolean>() {
             public Boolean callback(ShardedJedis e) {
-                e.set(key, value);
-                return e.setnx(key, value) == 1 ? true : false;
+                return e.setnx(key, value).equals(1L) ? true : false;
             }
         });
     }
@@ -140,8 +138,13 @@ public class RedisUtils {
 
         RedisUtils redisUtils = new RedisUtils();
         redisUtils.setShardedJedisPool(shardedJedisPool);
-        redisUtils.set("123","123");
-        System.out.println(redisUtils.get("123"));
+        JedisLock jedisLock = new JedisLock();
+        jedisLock.setRedisUtils(redisUtils);
+        System.out.println("第一次返回" + jedisLock.lock("31231231231"));
+        System.out.println("第二次返回" + jedisLock.lock("31231231231"));
+
+
+
     }
 
 }

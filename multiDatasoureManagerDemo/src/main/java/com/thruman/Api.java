@@ -3,13 +3,14 @@ package com.thruman;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author niexiang
  * @Description
  * @create 2018-03-12 19:00
  **/
-@MapperScan("com.thruman.dao")
+@EnableTransactionManagement
 @SpringBootApplication
 public class Api {
     public static void main(String[] args) {

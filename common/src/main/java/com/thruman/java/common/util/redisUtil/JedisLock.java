@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class JedisLock {
-    private static final Logger logger = LoggerFactory.getLogger(JedisLock.class);
+//    private static final Logger logger = LoggerFactory.getLogger(JedisLock.class);
 
     private volatile   boolean locked = false;
     //锁超时循环单位
@@ -23,7 +23,7 @@ public class JedisLock {
         try {
             return lock(acquiryTimeoutInMillis, lockExpiryInMillis, timeoutUnitInMillis, lockKey);
         } catch (InterruptedException e) {
-            logger.error("redis 获取锁失败", e);
+//            logger.error("redis 获取锁失败", e);
             return false;
         }
     }
@@ -85,5 +85,14 @@ public class JedisLock {
             redisUtils.del(lockKey);
             locked = false;
         }
+    }
+
+
+    public RedisUtils getRedisUtils() {
+        return redisUtils;
+    }
+
+    public void setRedisUtils(RedisUtils redisUtils) {
+        this.redisUtils = redisUtils;
     }
 }

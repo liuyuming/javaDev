@@ -1,0 +1,25 @@
+spring:
+  jta:
+    enabled: true
+    service: com.atomikos.icatch.standalone.UserTransactionServiceFactory
+    max-actives: 200
+    enable-logging: false
+    atomikos:
+      datasource:
+        masterDataSource:
+          unique-resource-name: account
+          xa-data-source-class-name: com.alibaba.druid.pool.xa.DruidXADataSource
+          xa-properties:
+            driverClassName: com.mysql.jdbc.Driver
+            username: root
+            url: jdbc:mysql://myaws:3306/myth_account?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+            password: "newPwd"
+        clusterDataSource:
+          unique-resource-name: order
+          xa-data-source-class-name: com.alibaba.druid.pool.xa.DruidXADataSource
+          xa-properties:
+            driverClassName: com.mysql.jdbc.Driver
+            username: root
+            url: jdbc:mysql://myaws:3306/myth_order?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&failOverReadOnly=false
+            password: "newPwd"
+

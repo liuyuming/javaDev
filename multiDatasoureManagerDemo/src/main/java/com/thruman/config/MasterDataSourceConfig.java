@@ -1,11 +1,12 @@
 package com.thruman.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -23,34 +24,14 @@ public class MasterDataSourceConfig {
     static final String PACKAGE = "com.thruman.dao.master";
     static final String MAPPER_LOCATION = "classpath:mapper/master/*.xml";
 
-    @Value("${master.datasource.url}")
-    private String url;
-
-    @Value("${master.datasource.username}")
-    private String user;
-
-    @Value("${master.datasource.password}")
-    private String password;
-
-    @Value("${master.datasource.driverClassName}")
-    private String driverClass;
 
     @Bean(name = "masterDataSource")
     @Primary
+    @ConfigurationProperties(prefix = "spring.jta.atomikos.datasource.masterDataSource")
     public DataSource masterDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setDriverClassName(driverClass);
-        dataSource.setUrl(url);
-        dataSource.setUsername(user);
-        dataSource.setPassword(password);
-        return dataSource;
+        return new AtomikosDataSourceBean();
     }
 
-    @Bean(name = "masterTransactionManager")
-    @Primary
-    public DataSourceTransactionManager masterTransactionManager() {
-        return new DataSourceTransactionManager(masterDataSource());
-    }
 
     @Bean(name = "masterSqlSessionFactory")
     @Primary
@@ -62,4 +43,11 @@ public class MasterDataSourceConfig {
                 .getResources(MasterDataSourceConfig.MAPPER_LOCATION));
         return sessionFactory.getObject();
     }
+
+    @Bean(name = "masterSqlSessionTemplate")
+    public SqlSessionTemplate testSqlSessionTemplate(
+            @Qualifier("masterSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
 }

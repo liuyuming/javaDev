@@ -16,7 +16,7 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.thruman.pojo.Order" >
-    insert into order (id, create_time, number, 
+    insert into `order` (id, create_time, number,
       status, product_id, total_amount, 
       count, user_id)
     values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{number,jdbcType=VARCHAR}, 
