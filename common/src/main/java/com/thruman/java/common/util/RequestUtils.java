@@ -1,8 +1,17 @@
 package com.thruman.java.common.util;
 
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
+/**
+ * @author niexiang
+ * @Description
+ * @create 2018-04-03 10:40
+ **/
 public class RequestUtils {
 
     public static Integer getUserID(HttpServletRequest request){
@@ -36,7 +45,25 @@ public class RequestUtils {
     public static String getIpAddress(final HttpServletRequest request) {
         // 获取请求主机IP地址,如果通过代理进来，则透过防火墙获取真实IP地址
         String ip = request.getHeader("X-Forwarded-For");
+        setIP(ip,request);
+        return ip;
+    }
 
+
+    /**
+     * 获取ip地址
+     *
+     * @return
+     */
+    public static String getIpAddress() {
+        // 获取请求主机IP地址,如果通过代理进来，则透过防火墙获取真实IP地址
+        HttpServletRequest request = getHttpRequest();
+        String ip = request.getHeader("X-Forwarded-For");
+        setIP(ip,request);
+        return ip;
+    }
+
+    private static void setIP(String ip, HttpServletRequest request) {
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
                 ip = request.getHeader("Proxy-Client-IP");
@@ -63,6 +90,14 @@ public class RequestUtils {
                 }
             }
         }
-        return ip;
     }
+
+
+    public static HttpServletRequest getHttpRequest() {
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        return sra.getRequest();
+    }
+
+
 }
